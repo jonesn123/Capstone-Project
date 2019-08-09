@@ -1,10 +1,15 @@
-package com.nanodegree.hyunyong.microdotstatus;
+package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import com.nanodegree.hyunyong.microdotstatus.R;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +22,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        TabFragmentPagerAdapter adapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new CurrentAreaFragment(), "current");
+        adapter.addFragment(new CurrentAreaFragment(), "second");
+        viewPager.setAdapter(adapter);
 
     }
 
