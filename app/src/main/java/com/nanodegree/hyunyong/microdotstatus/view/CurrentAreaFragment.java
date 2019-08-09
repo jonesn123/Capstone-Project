@@ -1,20 +1,19 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.nanodegree.hyunyong.microdotstatus.R;
 
-public class CurrentAreaFragment extends Fragment {
+import dagger.android.support.DaggerFragment;
+
+public class CurrentAreaFragment extends DaggerFragment {
 
     private CurrentAreaViewModel mViewModel;
 
@@ -31,7 +30,7 @@ public class CurrentAreaFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(CurrentAreaViewModel.class);
+//        mViewModel = ViewModelProviders.of(this).get(CurrentAreaViewModel.class);
         // TODO: Use the ViewModel
     }
 
