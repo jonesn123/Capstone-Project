@@ -1,23 +1,26 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-import com.nanodegree.hyunyong.microdotstatus.R;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.nanodegree.hyunyong.microdotstatus.R;
 
-import dagger.android.DaggerActivity;
 import dagger.android.support.DaggerAppCompatActivity;
 
-public class MainActivity extends DaggerAppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity implements View.OnClickListener {
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton search, location, add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,17 @@ public class MainActivity extends DaggerAppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+
+        search = findViewById(R.id.fab_search);
+        location = findViewById(R.id.fab_location);
+        add = findViewById(R.id.fab_add);
+
+        search.setOnClickListener(this);
+        location.setOnClickListener(this);
+        add.setOnClickListener(this);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -60,5 +74,41 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.fab_search:
+                anim();
+                Toast.makeText(this, "Floating Action Button", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.fab_location:
+                anim();
+                Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.fab_add:
+                anim();
+                Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    private void anim() {
+
+        if (isFabOpen) {
+            search.startAnimation(fab_close);
+            location.startAnimation(fab_close);
+            search.setClickable(false);
+            location.setClickable(false);
+            isFabOpen = false;
+        } else {
+            search.startAnimation(fab_open);
+            location.startAnimation(fab_open);
+            search.setClickable(true);
+            location.setClickable(true);
+            isFabOpen = true;
+        }
     }
 }
