@@ -4,11 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.nanodegree.hyunyong.microdotstatus.data.Repository;
+import com.nanodegree.hyunyong.microdotstatus.data.Webservice;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module(includes = {ViewModelModule.class})
 abstract class AppModule {
 
     @Binds
@@ -17,5 +20,10 @@ abstract class AppModule {
     @Provides
     static SharedPreferences provideSharedPreference(Context context) {
         return context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    static Repository provideRepository(Webservice webservice, SharedPreferences sharedPreferences) {
+        return new Repository(webservice, sharedPreferences);
     }
 }

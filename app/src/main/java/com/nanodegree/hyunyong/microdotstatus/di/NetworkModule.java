@@ -1,5 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.di;
 
+import com.nanodegree.hyunyong.microdotstatus.data.Webservice;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -30,5 +32,11 @@ class NetworkModule {
                 .client(client)
                 .addConverterFactory(factory)
                 .build();
+    }
+
+    @Singleton
+    @Provides
+    static Webservice provideWebService(Retrofit retrofit) {
+        return retrofit.create(Webservice.class);
     }
 }

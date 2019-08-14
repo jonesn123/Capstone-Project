@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.common.api.ApiException;
@@ -58,6 +59,8 @@ public class CurrentAreaFragment extends DaggerFragment {
         return new CurrentAreaFragment();
     }
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class CurrentAreaFragment extends DaggerFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mViewModel = ViewModelProviders.of(this).get(CurrentAreaViewModel.class);
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(CurrentAreaViewModel.class);
         // TODO: Use the ViewModel
         init();
         startLocationUpdates();
