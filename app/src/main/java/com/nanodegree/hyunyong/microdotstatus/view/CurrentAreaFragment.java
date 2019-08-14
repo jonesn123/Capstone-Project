@@ -1,9 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -11,11 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,9 +30,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.nanodegree.hyunyong.microdotstatus.R;
-
-import java.text.DateFormat;
-import java.util.Date;
+import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 
 import javax.inject.Inject;
 
@@ -61,6 +56,7 @@ public class CurrentAreaFragment extends DaggerFragment {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -77,6 +73,7 @@ public class CurrentAreaFragment extends DaggerFragment {
     }
 
     private void init() {
+        if (getActivity() == null) return;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         mSettingsClient = LocationServices.getSettingsClient(getActivity());
 
@@ -87,7 +84,14 @@ public class CurrentAreaFragment extends DaggerFragment {
                 // location is received
                 mCurrentLocation = locationResult.getLastLocation();
 
-                Log.d("location", "location latitude : " + mCurrentLocation.getLatitude() +", longtitude : " +mCurrentLocation.getLongitude());
+                Log.d("location", "location latitude : " + mCurrentLocation.getLatitude() + ", longtitude : " + mCurrentLocation.getLongitude());
+                if (getActivity() == null) return;
+                mViewModel.getFeedFromLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()).observe(getActivity(), new Observer<ResponseState>() {
+                    @Override
+                    public void onChanged(ResponseState s) {
+                        Log.d("location", "response: "+ s.getData().getIaqi().getPm25().getV());
+                    }
+                });
 
             }
         };
