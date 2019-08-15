@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Microdot Status</string>
     <string name="action_settings">Settings</string>
+    <string name="pm2_5">Microdot : %.1f</string>
+    <string name="pm100">Smog : %.1f</string>
+    <string name="time">Time : %s</string>
 </resources>

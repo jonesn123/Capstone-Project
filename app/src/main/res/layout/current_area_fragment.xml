@@ -1,8 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.CurrentAreaFragment">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</FrameLayout>
+    <data>
+
+        <variable
+            name="microdot"
+            type="com.nanodegree.hyunyong.microdotstatus.data.Microdot" />
+
+        <variable
+            name="iaqi"
+            type="com.nanodegree.hyunyong.microdotstatus.data.Iaqi" />
+
+        <variable
+            name="city"
+            type="com.nanodegree.hyunyong.microdotstatus.data.City" />
+
+        <variable
+            name="time"
+            type="com.nanodegree.hyunyong.microdotstatus.data.Time" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#009966"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".view.CurrentAreaFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{city.name}"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            app:srcCompat="@drawable/very_good" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/pm100(iaqi.pm10.v)}"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            tools:text="PM10 : 10.0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/pm2_5(iaqi.pm25.v / 10.0f)}"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            tools:text="PM2.5 : 3.0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{@string/time(time.s)}"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</layout>

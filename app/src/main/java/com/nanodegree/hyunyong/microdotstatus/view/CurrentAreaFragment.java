@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,7 +31,9 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
 import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
+import com.nanodegree.hyunyong.microdotstatus.databinding.CurrentAreaFragmentBinding;
 
 import javax.inject.Inject;
 
@@ -49,6 +52,7 @@ public class CurrentAreaFragment extends DaggerFragment {
     private LocationSettingsRequest mLocationSettingsRequest;
     private LocationCallback mLocationCallback;
     private Location mCurrentLocation;
+    private CurrentAreaFragmentBinding mBinding;
 
     public static CurrentAreaFragment newInstance() {
         return new CurrentAreaFragment();
@@ -60,7 +64,8 @@ public class CurrentAreaFragment extends DaggerFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.current_area_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.current_area_fragment, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -90,6 +95,11 @@ public class CurrentAreaFragment extends DaggerFragment {
                     @Override
                     public void onChanged(ResponseState s) {
                         Log.d("location", "response: "+ s.getData().getIaqi().getPm25().getV());
+                        Microdot data = s.getData();
+                        if (data == null) return;
+                        mBinding.setIaqi(data.getIaqi());
+                        mBinding.setCity(data.getCity());
+                        mBinding.setTime(data.getTime());
                     }
                 });
 
