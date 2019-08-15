@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">미세먼지 상태</string>
     <string name="action_settings">설정</string>
-    <string name="pm2_5">초미세먼지 : %.1f</string>
-    <string name="pm100">미세먼지 : %.1f</string>
+    <string name="pm2_5">초 미세먼지(pm2.5) : %.1f</string>
+    <string name="pm100">미세먼지(pm10) : %.1f</string>
     <string name="time">측정시간 : %s</string>
 </resources>
