@@ -97,6 +97,7 @@ public class CurrentAreaFragment extends DaggerFragment {
                         Log.d("location", "response: "+ s.getData().getIaqi().getPm25().getV());
                         Microdot data = s.getData();
                         if (data == null) return;
+                        mBinding.setMicrodot(data);
                         mBinding.setIaqi(data.getIaqi());
                         mBinding.setCity(data.getCity());
                         mBinding.setTime(data.getTime());
