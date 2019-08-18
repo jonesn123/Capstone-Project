@@ -1,6 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
@@ -58,6 +59,48 @@ public class CurrentAreaFragment extends DaggerFragment {
         return new CurrentAreaFragment();
     }
 
+    private View.OnClickListener onAqiInformationClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            AlertDialog builder = new AlertDialog.Builder(getActivity()).create();
+            switch (v.getId()) {
+                case R.id.aqi_good:
+                    builder.setTitle(getString(R.string.good));
+                    builder.setIcon(R.drawable.very_good);
+                    builder.setMessage(getString(R.string.good_explain));
+                    break;
+                case R.id.aqi_moderate:
+                    builder.setTitle(getString(R.string.moderate));
+                    builder.setIcon(R.drawable.good);
+                    builder.setMessage(getString(R.string.moderate_explain));
+                    break;
+                case R.id.aqi_bad:
+                    builder.setTitle(getString(R.string.bad));
+                    builder.setIcon(R.drawable.normal);
+                    builder.setMessage(getString(R.string.bad_explain));
+                    break;
+                case R.id.aqi_so_bad:
+                    builder.setTitle(getString(R.string.unhealthy));
+                    builder.setIcon(R.drawable.bad);
+                    builder.setMessage(getString(R.string.unhealthy_explain));
+                    break;
+                case R.id.aqi_very_bad:
+                    builder.setTitle(getString(R.string.very_unhealthy));
+                    builder.setIcon(R.drawable.bad);
+                    builder.setMessage(getString(R.string.very_unhealthy_explain));
+                    break;
+                case R.id.aqi_extremely_bad:
+                    builder.setTitle(getString(R.string.hazardous));
+                    builder.setIcon(R.drawable.very_bad);
+                    builder.setMessage(getString(R.string.hazardous_explain));
+                    break;
+            }
+
+            builder.show();
+        }
+    };
+
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
@@ -94,7 +137,7 @@ public class CurrentAreaFragment extends DaggerFragment {
                 mViewModel.getFeedFromLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()).observe(getActivity(), new Observer<ResponseState>() {
                     @Override
                     public void onChanged(ResponseState s) {
-                        Log.d("location", "response: "+ s.getData().getIaqi().getPm25().getV());
+                        Log.d("location", "response: " + s.getData().getIaqi().getPm25().getV());
                         Microdot data = s.getData();
                         if (data == null) return;
                         mBinding.setMicrodot(data);
@@ -113,6 +156,18 @@ public class CurrentAreaFragment extends DaggerFragment {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
         builder.addLocationRequest(mLocationRequest);
         mLocationSettingsRequest = builder.build();
+
+        setClickListener();
+    }
+
+    private void setClickListener() {
+        View rootView = mBinding.getRoot();
+        rootView.findViewById(R.id.aqi_good).setOnClickListener(onAqiInformationClickListener);
+        rootView.findViewById(R.id.aqi_moderate).setOnClickListener(onAqiInformationClickListener);
+        rootView.findViewById(R.id.aqi_bad).setOnClickListener(onAqiInformationClickListener);
+        rootView.findViewById(R.id.aqi_so_bad).setOnClickListener(onAqiInformationClickListener);
+        rootView.findViewById(R.id.aqi_very_bad).setOnClickListener(onAqiInformationClickListener);
+        rootView.findViewById(R.id.aqi_extremely_bad).setOnClickListener(onAqiInformationClickListener);
     }
 
     /**

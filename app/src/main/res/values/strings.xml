@@ -8,4 +8,27 @@
     <string name="so2">SO2: %.1f</string>
     <string name="co">CO: %.1f</string>
     <string name="humidity">Humidity: %.1f</string>
+    <string name="aqi">AQI</string>
+    <string name="air_pollution_level">Air Pollution Level</string>
+    <string name="health_implications">Health Implications</string>
+    <string name="cautionary_statement_for_pm2_5">Cautionary Statement (for PM2.5)</string>
+    <string name="explain_table">The table below defines the Air Quality Index scale as defined by the US-EPA 2016 standard</string>
+    <string name="_0_50">0 – 50</string>
+    <string name="good">Good</string>
+    <string name="good_explain">Air quality is considered satisfactory, and air pollution poses little or no risk</string>
+    <string name="_51_100">51 -100</string>
+    <string name="moderate">Moderate</string>
+    <string name="moderate_explain">Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.\n\n*Cautionary*\nActive children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.</string>
+    <string name="_101_150">101–150</string>
+    <string name="bad">Unhealthy for Sensitive Groups</string>
+    <string name="bad_explain">Members of sensitive groups may experience health effects. The general public is not likely to be affected.\n\n*Cautionary*\nActive children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.</string>
+    <string name="_151_200">151–200</string>
+    <string name="unhealthy">Unhealthy</string>
+    <string name="unhealthy_explain">Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects\n\n*Cautionary*\nActive children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion</string>
+    <string name="_201_300">201–300</string>
+    <string name="very_unhealthy">Very Unhealthy</string>
+    <string name="very_unhealthy_explain">Health warnings of emergency conditions. The entire population is more likely to be affected.\n\n*Cautionary*\nActive children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.</string>
+    <string name="_300_plus">300+</string>
+    <string name="hazardous">Hazardous</string>
+    <string name="hazardous_explain">Health alert: everyone may experience more serious health effects\n\n*Cautionary*\nEveryone should avoid all outdoor exertion.</string>
 </resources>

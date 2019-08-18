@@ -8,4 +8,13 @@
   <color name="secondaryDarkColor">#599014</color>
   <color name="primaryTextColor">#000000</color>
   <color name="secondaryTextColor">#000000</color>
+
+  <!-- aqi information color -->
+  <color name="aqi_good">#43966A</color>
+  <color name="aqi_moderate">#FADE59</color>
+  <color name="aqi_bad">#F19D4B</color>
+  <color name="aqi_so_bad">#BB2739</color>
+  <color name="aqi_very_bad">#5D1893</color>
+  <color name="aqi_extremely_bad">#731425</color>
+
 </resources>

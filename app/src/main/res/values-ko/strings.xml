@@ -8,5 +8,30 @@
     <string name="no2">NO2: %.1f</string>
     <string name="so2">SO2: %.1f</string>
     <string name="co">CO: %.1f</string>
-    <string name="humidity">Humidity: %.1f</string>
+    <string name="humidity">습도: %.1f</string>
+
+
+    <string name="aqi">AQI</string>
+    <string name="air_pollution_level">Air Pollution Level</string>
+    <string name="health_implications">Health Implications</string>
+    <string name="cautionary_statement_for_pm2_5">Cautionary Statement (for PM2.5)</string>
+    <string name="explain_table">The table below defines the Air Quality Index scale as defined by the US-EPA 2016 standard</string>
+    <string name="_0_50">0 – 50</string>
+    <string name="good">좋음</string>
+    <string name="good_explain">대기오염 관련 질환자군에서도 영향이 유발되지 않을 수준</string>
+    <string name="_51_100">51 -100</string>
+    <string name="moderate">보통</string>
+    <string name="moderate_explain">환자군에게 만성 노출시 경미한 영향이 유발될 수 있는 수준</string>
+    <string name="_101_150">101–150</string>
+    <string name="bad">민감군 영향</string>
+    <string name="bad_explain">환자군 및 민감군에게 유해한 영향이 유발될 수 있는 수준</string>
+    <string name="_151_200">151–200</string>
+    <string name="unhealthy">나쁨</string>
+    <string name="unhealthy_explain">환자군 및 민감군(어린이, 노약자 등)에게 유해한 영향 유발, 일반인도 건강상 불쾌감을 경험할 수 있는 수준</string>
+    <string name="_201_300">201–300</string>
+    <string name="very_unhealthy">매우 나쁨</string>
+    <string name="very_unhealthy_explain">환자군 및 민감군에게 급성 노출시 심각한 영향 유발, 일반인도 약한 영향이 유발될 수 있는 수준</string>
+    <string name="_300_plus">300+</string>
+    <string name="hazardous">위험</string>
+    <string name="hazardous_explain">환자군 및 민감군에게 응급 조치가 발생되거나, 일반인에게 유해한 영향이 유발될 수 있는 수준</string>
 </resources>
