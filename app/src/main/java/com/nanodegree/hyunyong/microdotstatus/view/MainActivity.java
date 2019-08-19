@@ -95,7 +95,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
 
     private void setupViewPager(ViewPager viewPager) {
         TabFragmentPagerAdapter adapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CurrentAreaFragment(), "current");
+        adapter.addFragment(new CurrentAreaFragment(), getResources().getString(R.string.current_city));
         viewPager.setAdapter(adapter);
 
     }

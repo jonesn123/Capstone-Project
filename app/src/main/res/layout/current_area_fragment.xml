@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,12 +19,14 @@
         <variable
             name="time"
             type="com.nanodegree.hyunyong.microdotstatus.data.Time" />
+
+        <import type="com.nanodegree.hyunyong.microdotstatus.ColorUtil" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".view.CurrentAreaFragment">
@@ -34,23 +37,23 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:text="@{city.name}"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#009966"
                 android:gravity="center"
                 android:text="@{String.valueOf(microdot.aqi)}"
-                android:textColor="@android:color/white"
                 android:textSize="40sp"
+                app:aqi="@{microdot.aqi}"
                 tools:text="59" />
 
             <LinearLayout
@@ -58,6 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -76,62 +80,36 @@
                     tools:text="Updated on Saturday 23:00" />
             </LinearLayout>
 
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{@string/pm2_5(iaqi.pm25.v)}"
-                android:textSize="20sp"
-                tools:text="PM2.5: 3" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/what_is_aqi"
+                android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <include
+                layout="@layout/aqi_detail"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{@string/pm10(iaqi.pm10.v)}"
-                android:textSize="20sp"
-                tools:text="PM10: 10" />
+                android:layout_weight="1"
+                app:iaqi="@{iaqi}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/o3(iaqi.o3.v)}"
-                android:textSize="20sp"
-                tools:text="O3: 8.8" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/no2(iaqi.no2.v)}"
-                android:textSize="20sp"
-                tools:text="NO2: 10" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/so2(iaqi.so2.v)}"
-                android:textSize="20sp"
-                tools:text="SO2: 10" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/co(iaqi.co.v)}"
-                android:textSize="20sp"
-                tools:text="CO: 2.2" />
         </LinearLayout>
 
         <include
             layout="@layout/aqi_information"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
     </LinearLayout>
 
 </layout>

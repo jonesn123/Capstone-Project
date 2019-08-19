@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="iaqi"
+            type="com.nanodegree.hyunyong.microdotstatus.data.Iaqi" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/pm2_5(iaqi.pm25.v)}"
+            android:textSize="16sp"
+            tools:text="PM2.5: 3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/pm10(iaqi.pm10.v)}"
+            android:textSize="16sp"
+            tools:text="PM10: 10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/o3(iaqi.o3.v)}"
+            android:textSize="16sp"
+            tools:text="O3: 8.8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/no2(iaqi.no2.v)}"
+            android:textSize="16sp"
+            tools:text="NO2: 10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/so2(iaqi.so2.v)}"
+            android:textSize="16sp"
+            tools:text="SO2: 10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/co(iaqi.co.v)}"
+            android:textSize="16sp"
+            tools:text="CO: 2.2" />
+    </LinearLayout>
+</layout>

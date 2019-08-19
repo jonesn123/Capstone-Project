@@ -210,4 +210,5 @@ public class CurrentAreaFragment extends DaggerFragment {
                     }
                 });
     }
+
 }
