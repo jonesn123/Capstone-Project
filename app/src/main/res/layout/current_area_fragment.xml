@@ -20,7 +20,7 @@
             name="time"
             type="com.nanodegree.hyunyong.microdotstatus.data.Time" />
 
-        <import type="com.nanodegree.hyunyong.microdotstatus.ColorUtil" />
+        <import type="com.nanodegree.hyunyong.microdotstatus.BindingUtil" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -67,10 +67,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Moderate"
                     android:textColor="#009966"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:aqiText="@{microdot.aqi}" />
 
                 <TextView
                     android:layout_width="wrap_content"

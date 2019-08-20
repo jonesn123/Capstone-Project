@@ -1,6 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.di;
 
 import com.nanodegree.hyunyong.microdotstatus.view.MainActivity;
+import com.nanodegree.hyunyong.microdotstatus.view.SearchActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,4 +10,7 @@ import dagger.android.ContributesAndroidInjector;
 abstract class ActivityBuilder {
     @ContributesAndroidInjector
     abstract MainActivity contributeMainActivity();
+
+    @ContributesAndroidInjector
+    abstract SearchActivity contributeSearchActivity();
 }
