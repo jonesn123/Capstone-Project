@@ -31,5 +31,6 @@
     <string name="_300_plus">300+</string>
     <string name="hazardous">Hazardous</string>
     <string name="hazardous_explain">Health alert: everyone may experience more serious health effects\n\n*Cautionary*\nEveryone should avoid all outdoor exertion.</string>
-    <string name="search_location">Search Location</string>
+    <string name="search_location">Search City</string>
+    <string name="no_result">There is no result.</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.SerializedName;
 
 public class Microdot {
     private float aqi;

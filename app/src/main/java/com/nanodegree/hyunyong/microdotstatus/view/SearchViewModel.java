@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.nanodegree.hyunyong.microdotstatus.data.CitiesResponse;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.Repository;
-import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,6 +19,10 @@ public class SearchViewModel extends ViewModel {
     private Repository repository;
 
     private MutableLiveData citiesLiveData = new MutableLiveData<List<City>>();
+
+    public LiveData<List<City>> getCitiesLiveData() {
+        return citiesLiveData;
+    }
 
     @Inject
     public SearchViewModel(Repository repository) {

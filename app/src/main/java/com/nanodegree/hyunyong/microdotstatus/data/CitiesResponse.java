@@ -5,11 +5,11 @@ import java.util.List;
 
 public class CitiesResponse {
     private String status;
-    List<ResponseState> data = new ArrayList<>();
+    List<CityInformation> data = new ArrayList<>();
     public List<City> getCities() {
         List<City> cities = new ArrayList<>();
-        for(ResponseState response: data) {
-            cities.add(response.getData().getCity());
+        for(CityInformation response: data) {
+            cities.add(response.getCity());
         }
         return cities;
     }

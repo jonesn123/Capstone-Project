@@ -1,9 +1,10 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class City {
-    ArrayList < Object > geo = new ArrayList< Object >();
+//    List<Float> geo = new ArrayList<>();
     private String name;
     private String url;
 

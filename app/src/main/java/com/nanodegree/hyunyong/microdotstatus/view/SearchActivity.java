@@ -6,16 +6,21 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.nanodegree.hyunyong.microdotstatus.R;
 import com.nanodegree.hyunyong.microdotstatus.data.CitiesResponse;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
+import com.nanodegree.hyunyong.microdotstatus.databinding.ActivitySearchBinding;
 import com.nanodegree.hyunyong.microdotstatus.di.DaggerAppComponent;
 
 import java.util.List;
@@ -35,10 +40,29 @@ public class SearchActivity extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this, R.layout.activity_search);
+        final ActivitySearchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
         setTitle(R.string.search_location);
 
+        final RecyclerView recyclerView = findViewById(R.id.search_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, RecyclerView.VERTICAL));
+
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
+        mViewModel.getCitiesLiveData().observe(this, new Observer<List<City>>() {
+            @Override
+            public void onChanged(final List<City> cities) {
+                binding.setCities(cities);
+                final SearchRecyclerViewAdapter adapter = new SearchRecyclerViewAdapter(cities,
+                        new SearchRecyclerViewAdapter.OnCityClickListener() {
+                            @Override
+                            public void onClick(int position) {
+                                Toast.makeText(SearchActivity.this,
+                                        cities.get(position).getName(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
