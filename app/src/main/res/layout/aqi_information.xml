@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/explain_table"
-        android:textSize="16sp" />
+        android:textColor="@color/secondaryColor"
+        android:textSize="12sp" />
 
     <TableLayout
         android:layout_width="match_parent"

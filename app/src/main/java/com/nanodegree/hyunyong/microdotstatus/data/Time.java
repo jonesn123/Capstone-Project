@@ -1,8 +1,12 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Time {
+    @SerializedName(value = "s", alternate = "stime")
     private String s;
     private String tz;
+    @SerializedName(value = "v", alternate = "vtime")
     private float v;
 
 
