@@ -1,0 +1,345 @@
+{
+  "status": "ok",
+  "data": [
+    {
+      "uid": 1291,
+      "aqi": "122",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanli Street, Hefei",
+        "geo": [
+          31.8766,
+          117.307
+        ],
+        "url": "china/hefei/sanlijie"
+      }
+    },
+    {
+      "uid": 1528,
+      "aqi": "114",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanmenxia",
+        "geo": [
+          34.772494,
+          111.200135
+        ],
+        "url": "sanmenxia"
+      }
+    },
+    {
+      "uid": 3425,
+      "aqi": "112",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanlu Hospital, Baoji",
+        "geo": [
+          34.3672,
+          107.1906
+        ],
+        "url": "china/baoji/sanluyiyuan"
+      }
+    },
+    {
+      "uid": 1362,
+      "aqi": "97",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanwayao, Chengdu",
+        "geo": [
+          30.5706,
+          104.079
+        ],
+        "url": "china/chengdu/sanwayao"
+      }
+    },
+    {
+      "uid": 7888,
+      "aqi": "95",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanming",
+        "geo": [
+          26.263407,
+          117.638678
+        ],
+        "url": "sanming"
+      }
+    },
+    {
+      "uid": 10689,
+      "aqi": "83",
+      "time": {
+        "tz": "-0300",
+        "stime": "2019-08-22 09:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "San Fernando, Chile",
+        "geo": [
+          -34.579759917069,
+          -70.989685186508
+        ],
+        "url": "chile/san-fernando"
+      }
+    },
+    {
+      "uid": 1612,
+      "aqi": "63",
+      "time": {
+        "tz": "+0800",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanyi, Taiwan",
+        "geo": [
+          24.382942,
+          120.758833
+        ],
+        "url": "taiwan/sanyi"
+      }
+    },
+    {
+      "uid": 379,
+      "aqi": "52",
+      "time": {
+        "tz": "-0500",
+        "stime": "2019-08-22 06:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "San Borja, Lima, Peru",
+        "geo": [
+          -12.10863,
+          -77.00777
+        ],
+        "url": "peru/lima/san-borja"
+      }
+    },
+    {
+      "uid": 2189,
+      "aqi": "42",
+      "time": {
+        "tz": "+0900",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "Sanjo, Suzuka, Mie, Japan",
+        "geo": [
+          34.8779071,
+          136.5528526
+        ],
+        "url": "japan/suzukashi/suzukasanjohoikusho"
+      }
+    },
+    {
+      "uid": 8879,
+      "aqi": "40",
+      "time": {
+        "tz": "-05:00",
+        "stime": "2019-08-22 04:00:00",
+        "vtime": 1566464400
+      },
+      "station": {
+        "name": "San Juanico, Mexico",
+        "geo": [
+          20.537489,
+          -100.839905
+        ],
+        "url": "mexico/guanajuato/san-juanico"
+      }
+    },
+    {
+      "uid": 8449,
+      "aqi": "37",
+      "time": {
+        "tz": "+02:00",
+        "stime": "2019-08-22 10:00:00",
+        "vtime": 1566460800
+      },
+      "station": {
+        "name": "San Fernando, Spain",
+        "geo": [
+          36.4718646,
+          -6.1965948
+        ],
+        "url": "spain/andalucia/san-fernando"
+      }
+    },
+    {
+      "uid": 2605,
+      "aqi": "37",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 20:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sandakan, Sabah, Malaysia",
+        "geo": [
+          5.864467,
+          118.091089
+        ],
+        "url": "malaysia/sabah/sandakan"
+      }
+    },
+    {
+      "uid": 10157,
+      "aqi": "34",
+      "time": {
+        "tz": "-05:00",
+        "stime": "2019-08-22 06:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "Santa FE, México, Mexico",
+        "geo": [
+          19.357357,
+          -99.262865
+        ],
+        "url": "mexico/mexico/santa-fe"
+      }
+    },
+    {
+      "uid": 1555,
+      "aqi": "30",
+      "time": {
+        "tz": "+08:00",
+        "stime": "2019-08-22 19:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "Sanya",
+        "geo": [
+          18.252847,
+          109.511909
+        ],
+        "url": "sanya"
+      }
+    },
+    {
+      "uid": 8139,
+      "aqi": "22",
+      "time": {
+        "tz": "-04:00",
+        "stime": "2019-08-22 08:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "San Juan, Puerto Rico",
+        "geo": [
+          18.428388,
+          -66.141657
+        ],
+        "url": "puerto-rico/san-juan"
+      }
+    },
+    {
+      "uid": 1651,
+      "aqi": "17",
+      "time": {
+        "tz": "+0800",
+        "stime": "2019-08-22 19:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "Sanchong, Taiwan",
+        "geo": [
+          25.072611,
+          121.493806
+        ],
+        "url": "taiwan/sanchong"
+      }
+    },
+    {
+      "uid": 4090,
+      "aqi": "13",
+      "time": {
+        "tz": "+03:00",
+        "stime": "2019-08-22 15:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sanliurfa, Turkey",
+        "geo": [
+          37.160417594911,
+          38.786709147858
+        ],
+        "url": "turkey/guney-dogu-anadolu/sanliurfa"
+      }
+    },
+    {
+      "uid": 381,
+      "aqi": "9",
+      "time": {
+        "tz": "-0500",
+        "stime": "2019-08-22 07:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Santa Anita, Lima, Peru",
+        "geo": [
+          -12.043,
+          -76.97142
+        ],
+        "url": "peru/lima/santa-anita"
+      }
+    },
+    {
+      "uid": 5273,
+      "aqi": "9",
+      "time": {
+        "tz": "-1000",
+        "stime": "2019-08-22 01:00:00",
+        "vtime": 1566471600
+      },
+      "station": {
+        "name": "Sand Island, Hawaii, USA",
+        "geo": [
+          21.30383819,
+          -157.8711711
+        ],
+        "url": "usa/hawaii/sand-island"
+      }
+    },
+    {
+      "uid": 5319,
+      "aqi": "5",
+      "time": {
+        "tz": "-0800",
+        "stime": "2019-08-22 04:00:00",
+        "vtime": 1566475200
+      },
+      "station": {
+        "name": "Sandpoint, Idaho, USA",
+        "geo": [
+          48.292141,
+          -116.556656
+        ],
+        "url": "usa/idaho/sandpoint"
+      }
+    }
+  ]
+}

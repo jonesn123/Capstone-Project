@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +36,23 @@ public class Repository {
             }
         });
 
+        return data;
+    }
+
+    public LiveData<CitiesResponse> getFeedFromCity(String keyword) {
+        final MutableLiveData<CitiesResponse> data = new MutableLiveData<>();
+
+        webservice.getFeedByKeyword(keyword).enqueue(new Callback<CitiesResponse>() {
+            @Override
+            public void onResponse(Call<CitiesResponse> call, Response<CitiesResponse> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<CitiesResponse> call, Throwable t) {
+                Log.d("TAG", "fail");
+            }
+        });
         return data;
     }
 }
