@@ -1,6 +1,11 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -10,18 +15,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.nanodegree.hyunyong.microdotstatus.R;
 import com.nanodegree.hyunyong.microdotstatus.data.CitiesResponse;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
-import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 import com.nanodegree.hyunyong.microdotstatus.databinding.ActivitySearchBinding;
-import com.nanodegree.hyunyong.microdotstatus.di.DaggerAppComponent;
 
 import java.util.List;
 
@@ -30,7 +27,9 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class SearchActivity extends DaggerAppCompatActivity {
-
+    public static String EXTRA_CITY_NAME = "cityname";
+    public static String EXTRA_LATITUDE = "latitude";
+    public static String EXTRA_LONGTITUDE = "longtitude";
 
     private SearchViewModel mViewModel;
 
@@ -56,8 +55,13 @@ public class SearchActivity extends DaggerAppCompatActivity {
                         new SearchRecyclerViewAdapter.OnCityClickListener() {
                             @Override
                             public void onClick(int position) {
-                                Toast.makeText(SearchActivity.this,
-                                        cities.get(position).getName(), Toast.LENGTH_LONG).show();
+                                City city = cities.get(position);
+                                Intent intent = new Intent();
+                                intent.putExtra(EXTRA_CITY_NAME, city.getName());
+                                intent.putExtra(EXTRA_LATITUDE, city.getGeo().get(0));
+                                intent.putExtra(EXTRA_LONGTITUDE, city.getGeo().get(1));
+                                setResult(MainActivity.RESULT_OK, intent);
+                                finish();
                             }
                         });
                 recyclerView.setAdapter(adapter);

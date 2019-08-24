@@ -44,7 +44,7 @@ public class CurrentAreaFragment extends DaggerFragment {
 
     private static final int REQUEST_CHECK_SETTINGS = 100;
 
-    private CurrentAreaViewModel mViewModel;
+    private CityViewModel mViewModel;
 
     // bunch of location related apis
     private FusedLocationProviderClient mFusedLocationClient;
@@ -114,7 +114,7 @@ public class CurrentAreaFragment extends DaggerFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(CurrentAreaViewModel.class);
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(CityViewModel.class);
         // TODO: Use the ViewModel
         init();
         startLocationUpdates();
@@ -137,7 +137,6 @@ public class CurrentAreaFragment extends DaggerFragment {
                 mViewModel.getFeedFromLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()).observe(getActivity(), new Observer<ResponseState>() {
                     @Override
                     public void onChanged(ResponseState s) {
-                        Log.d("location", "response: " + s.getData().getIaqi().getPm25().getV());
                         Microdot data = s.getData();
                         if (data == null) return;
                         mBinding.setMicrodot(data);

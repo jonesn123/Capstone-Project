@@ -13,8 +13,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,9 +33,13 @@ import com.nanodegree.hyunyong.microdotstatus.R;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity implements View.OnClickListener {
+    public static final int REQUEST_SEARCH = 0;
+    public static final int RESULT_OK = 1;
+    public static final int RESULT_CANCEL = 2;
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
     private FloatingActionButton search, location, add;
+    private TabFragmentPagerAdapter adapter;
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
@@ -93,8 +99,8 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        TabFragmentPagerAdapter adapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CurrentAreaFragment(), getResources().getString(R.string.current_city));
+        adapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(CurrentAreaFragment.newInstance(), getResources().getString(R.string.current_city));
         viewPager.setAdapter(adapter);
 
     }
@@ -106,7 +112,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
             case R.id.fab_search:
                 anim();
                 Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_SEARCH);
                 break;
             case R.id.fab_location:
                 anim();
@@ -151,5 +157,25 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
         intent.setData(uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_SEARCH) {
+            if (resultCode == RESULT_OK) {
+                String cityName = data.getStringExtra(SearchActivity.EXTRA_CITY_NAME);
+                float latitude = data.getFloatExtra(SearchActivity.EXTRA_LATITUDE, 0);
+                float longtitude = data.getFloatExtra(SearchActivity.EXTRA_LONGTITUDE, 0);
+
+                String simpleCityName = cityName.split(",|\\;")[0];
+                Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
+                adapter.addFragment(fragment, simpleCityName);
+
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+                TabLayout.Tab tab = tabLayout.getTabAt(adapter.getCount() - 1);
+                tab.select();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

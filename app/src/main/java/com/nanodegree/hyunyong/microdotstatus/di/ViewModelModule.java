@@ -3,7 +3,7 @@ package com.nanodegree.hyunyong.microdotstatus.di;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nanodegree.hyunyong.microdotstatus.view.CurrentAreaViewModel;
+import com.nanodegree.hyunyong.microdotstatus.view.CityViewModel;
 import com.nanodegree.hyunyong.microdotstatus.view.SearchViewModel;
 
 import dagger.Binds;
@@ -14,8 +14,8 @@ import dagger.multibindings.IntoMap;
 abstract class ViewModelModule {
     @Binds
     @IntoMap
-    @ViewModelKey(CurrentAreaViewModel.class)
-    abstract ViewModel bindCurrentAreaViewModel(CurrentAreaViewModel currentAreaViewModel);
+    @ViewModelKey(CityViewModel.class)
+    abstract ViewModel bindCurrentAreaViewModel(CityViewModel cityViewModel);
 
     @Binds
     @IntoMap

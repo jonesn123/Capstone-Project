@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class City {
-//    List<Float> geo = new ArrayList<>();
+    List<Float> geo = new ArrayList<>();
     private String name;
     private String url;
 
@@ -22,5 +22,13 @@ public class City {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<Float> getGeo() {
+        return geo;
+    }
+
+    public void setGeo(List<Float> geo) {
+        this.geo = geo;
     }
 }

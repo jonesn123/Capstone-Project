@@ -8,11 +8,11 @@ import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 
 import javax.inject.Inject;
 
-public class CurrentAreaViewModel extends ViewModel {
+public class CityViewModel extends ViewModel {
 
     private Repository repository;
     @Inject
-    public CurrentAreaViewModel(Repository repository) {
+    public CityViewModel(Repository repository) {
         this.repository = repository;
     }
 
