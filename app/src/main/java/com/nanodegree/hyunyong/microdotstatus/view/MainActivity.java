@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -111,12 +109,11 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
         switch (id) {
             case R.id.fab_search:
                 anim();
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivityForResult(intent, REQUEST_SEARCH);
+                startActivityForResult(new Intent(this, SearchActivity.class), REQUEST_SEARCH);
                 break;
             case R.id.fab_location:
                 anim();
-                Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(this, MapsActivity.class), REQUEST_SEARCH);
                 break;
             case R.id.fab_add:
                 anim();
@@ -171,7 +168,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
                 adapter.addFragment(fragment, simpleCityName);
 
-                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+                TabLayout tabLayout = findViewById(R.id.tabs);
                 TabLayout.Tab tab = tabLayout.getTabAt(adapter.getCount() - 1);
                 tab.select();
             }

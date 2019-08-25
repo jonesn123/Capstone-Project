@@ -30,6 +30,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -57,4 +58,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
+
+    def google_service = '17.0.0'
+    implementation "com.google.android.gms:play-services-maps:$google_service"
+    implementation "com.google.android.gms:play-services-location:$google_service"
 }

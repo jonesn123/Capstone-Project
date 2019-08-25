@@ -33,4 +33,5 @@
     <string name="hazardous_explain">Health alert: everyone may experience more serious health effects\n\n*Cautionary*\nEveryone should avoid all outdoor exertion.</string>
     <string name="search_location">Search City</string>
     <string name="no_result">There is no result. \nPlease search city accurately.</string>
+    <string name="title_activity_maps">Search Map</string>
 </resources>
