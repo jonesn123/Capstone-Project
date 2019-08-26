@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nanodegree.hyunyong.microdotstatus.view.CityViewModel;
+import com.nanodegree.hyunyong.microdotstatus.view.MapViewModel;
 import com.nanodegree.hyunyong.microdotstatus.view.SearchViewModel;
 
 import dagger.Binds;
@@ -21,6 +22,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchViewModel.class)
     abstract ViewModel bindSearchViewModel(SearchViewModel searchViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MapViewModel.class)
+    abstract ViewModel bindMapViewModel(MapViewModel mapViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(DaggerViewModelFactory factory);

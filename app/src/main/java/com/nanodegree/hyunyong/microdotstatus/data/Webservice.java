@@ -17,4 +17,8 @@ public interface Webservice {
 
     @GET("search/?token=03e45b511c0ed129eaf05889c2be73ab1ad260a5")
     Call<CitiesResponse> getFeedByKeyword(@Query("keyword") String keyword);
+
+    //39.379436,116.091230,40.235643,116.784382&
+    @GET("map/bounds/?token=03e45b511c0ed129eaf05889c2be73ab1ad260a5")
+    Call<MapResponse> getMapInformation(@Query("latlng") String latlng);
 }

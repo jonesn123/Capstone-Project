@@ -55,4 +55,21 @@ public class Repository {
         });
         return data;
     }
+
+    public LiveData<MapResponse> getMapInformation(String latlng) {
+        final MutableLiveData<MapResponse> data = new MutableLiveData<>();
+
+        webservice.getMapInformation(latlng).enqueue(new Callback<MapResponse>() {
+            @Override
+            public void onResponse(Call<MapResponse> call, Response<MapResponse> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<MapResponse> call, Throwable t) {
+                Log.d("TAG", "fail");
+            }
+        });
+        return data;
+    }
 }

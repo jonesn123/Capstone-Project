@@ -1,9 +1,10 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
-
 import android.os.Bundle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
@@ -15,18 +16,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
 import com.nanodegree.hyunyong.microdotstatus.R;
-import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
-import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
+
+import javax.inject.Inject;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager mLocationManager;
+    private MapViewModel mViewModel;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MapViewModel.class);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

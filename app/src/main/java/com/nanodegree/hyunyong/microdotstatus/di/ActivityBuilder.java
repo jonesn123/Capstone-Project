@@ -1,6 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.di;
 
 import com.nanodegree.hyunyong.microdotstatus.view.MainActivity;
+import com.nanodegree.hyunyong.microdotstatus.view.MapsActivity;
 import com.nanodegree.hyunyong.microdotstatus.view.SearchActivity;
 
 import dagger.Module;
@@ -13,4 +14,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract SearchActivity contributeSearchActivity();
+
+    @ContributesAndroidInjector
+    abstract MapsActivity contributeMapActivity();
 }

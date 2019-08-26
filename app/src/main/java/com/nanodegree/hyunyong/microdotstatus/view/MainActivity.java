@@ -117,7 +117,6 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 break;
             case R.id.fab_add:
                 anim();
-                Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

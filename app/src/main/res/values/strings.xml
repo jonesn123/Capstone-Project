@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">API Status</string>
+    <string name="app_name">AQI Status</string>
     <string name="current_city">Current</string>
     <string name="action_settings">Settings</string>
     <string name="pm2_5">PM2.5 (AQI): %.0f</string>
