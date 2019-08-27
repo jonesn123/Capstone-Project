@@ -2,7 +2,7 @@ package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -16,10 +16,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.data.Map;
+import com.nanodegree.hyunyong.microdotstatus.data.MapResponse;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import dagger.android.support.DaggerAppCompatActivity;
+
+public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager mLocationManager;
@@ -33,6 +39,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MapViewModel.class);
+        mViewModel.getMapLiveData().observe(this, new Observer<List<Map>>() {
+            @Override
+            public void onChanged(List<Map> maps) {
+                for (Map map : maps) {
+                    LatLng latLng = new LatLng(map.getLat(), map.getLon());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(map.getAqi()));
+                }
+            }
+        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -60,9 +75,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // location is received
 
                 mMap = googleMap;
-
                 LatLng currentArea = new LatLng(locationResult.getLastLocation().getLatitude(),
                         locationResult.getLastLocation().getLongitude());
+
+                String latlng = String.valueOf(currentArea.latitude) +
+                        "," + currentArea.longitude +
+                        "," + (currentArea.latitude + 0.7) +
+                        "," + (currentArea.longitude + 0.7);
+                mViewModel.fetchMapData(latlng).observe(MapsActivity.this, new Observer<MapResponse>() {
+                    @Override
+                    public void onChanged(MapResponse mapResponse) {
+                        // handling error
+                        if (!mapResponse.getStatus().equals("ok")) {
+
+                        }
+                    }
+                });
                 mMap.addMarker(new MarkerOptions().position(currentArea).title("Current Area"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(currentArea));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
