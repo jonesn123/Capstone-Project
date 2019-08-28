@@ -21,8 +21,12 @@ public class Map {
         return uid;
     }
 
-    public String getAqi() {
-        return aqi;
+    public float getAqi() {
+        try {
+            return Float.parseFloat(aqi);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     // Setter Methods

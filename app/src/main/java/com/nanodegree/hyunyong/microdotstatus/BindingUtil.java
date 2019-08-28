@@ -1,9 +1,6 @@
 package com.nanodegree.hyunyong.microdotstatus;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
@@ -66,4 +63,40 @@ public class BindingUtil {
         }
         textView.setTextColor(textColor);
     }
+
+    public static int getDrawableResourceByAqi(float aqi) {
+        int resourceId = 0;
+        if (aqi <= 50) {
+            resourceId = R.drawable.very_good;
+        } else if (aqi > 50 && aqi <= 100) {
+            resourceId = R.drawable.good;
+        } else if (aqi > 100 && aqi <= 150) {
+            resourceId = R.drawable.normal;
+        } else if (aqi > 150 && aqi <= 200) {
+            resourceId = R.drawable.bad;
+        } else {
+            resourceId = R.drawable.very_bad;
+        }
+        return resourceId;
+    }
+
+    public static int getColorResourceByAqi(float aqi) {
+        int resourceId = 0;
+        if (aqi <= 50) {
+            resourceId = R.color.aqi_good;
+        } else if (aqi > 50 && aqi <= 100) {
+            resourceId = R.color.aqi_moderate;
+        } else if (aqi > 100 && aqi <= 150) {
+            resourceId = R.color.aqi_bad;
+        } else if (aqi > 150 && aqi <= 200) {
+            resourceId = R.color.aqi_so_bad;
+        }  else if (aqi > 200 && aqi <= 300) {
+            resourceId = R.color.aqi_very_bad;
+        } else if (aqi > 300) {
+            resourceId = R.color.aqi_extremely_bad;
+
+        }
+        return resourceId;
+    }
+
 }
