@@ -35,4 +35,5 @@
     <string name="no_result">There is no result. \nPlease search city accurately.</string>
     <string name="title_activity_maps">Search Map</string>
     <string name="select">Select</string>
+    <string name="current_area">Current Area</string>
 </resources>

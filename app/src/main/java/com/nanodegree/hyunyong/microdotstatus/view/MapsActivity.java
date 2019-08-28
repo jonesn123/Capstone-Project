@@ -130,13 +130,9 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
                     @Override
                     public void onChanged(MapResponse mapResponse) {
                         // handling error
-                        if (!mapResponse.getStatus().equals("ok")) {
-                            Toast.makeText(MapsActivity.this, "ok", Toast.LENGTH_SHORT).show();
-
-                        }
                     }
                 });
-                mMap.addMarker(new MarkerOptions().position(currentArea).title("Current Area"));
+                mMap.addMarker(new MarkerOptions().position(currentArea).title(getString(R.string.current_area)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(currentArea));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
             }

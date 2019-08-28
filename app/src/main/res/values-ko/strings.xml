@@ -36,4 +36,5 @@
     <string name="no_result">검색 결과가 없습니다.\n정확한 도시명을 검색하세요.</string>
     <string name="title_activity_maps">지도 검색</string>
     <string name="select">선택</string>
+    <string name="current_area">현재 지역</string>
 </resources>
