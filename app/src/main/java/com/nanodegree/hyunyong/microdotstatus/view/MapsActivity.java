@@ -1,20 +1,19 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -27,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nanodegree.hyunyong.microdotstatus.BindingUtil;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
@@ -34,11 +34,17 @@ import com.nanodegree.hyunyong.microdotstatus.R;
 import com.nanodegree.hyunyong.microdotstatus.data.Map;
 import com.nanodegree.hyunyong.microdotstatus.data.MapResponse;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
+
+import static com.nanodegree.hyunyong.microdotstatus.view.SearchActivity.EXTRA_CITY_NAME;
+import static com.nanodegree.hyunyong.microdotstatus.view.SearchActivity.EXTRA_LATITUDE;
+import static com.nanodegree.hyunyong.microdotstatus.view.SearchActivity.EXTRA_LONGTITUDE;
 
 public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyCallback {
 
@@ -61,17 +67,51 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
                     LatLng latLng = new LatLng(map.getLat(), map.getLon());
 
                     try {
-                        LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
                         View view = LayoutInflater.from(MapsActivity.this).inflate(R.layout.marker_layout, null);
                         ((ImageView) view.findViewById(R.id.iv_icon)).setImageResource(BindingUtil.getDrawableResourceByAqi(map.getAqi()));
                         ((TextView) view.findViewById(R.id.tv_marker)).setText(String.valueOf(map.getAqi()));
                         view.findViewById(R.id.background).setBackgroundResource(BindingUtil.getColorResourceByAqi(map.getAqi()));
 
-                        mMap.addMarker(
-                                new MarkerOptions()
-                                        .position(latLng)
-                                        .title(getString(R.string.select))
-                                        .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(view))));
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .position(latLng)
+                                .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(view)));
+                        mMap.addMarker(markerOptions);
+
+                        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker) {
+                                LatLng position = marker.getPosition();
+                                Geocoder gcd = new Geocoder(MapsActivity.this, Locale.getDefault());
+                                try {
+                                    List<Address> addresses = gcd.getFromLocation(position.latitude, position.longitude, 1);
+                                    if (addresses.size() > 0) {
+                                        String addressLine = addresses.get(0).getAddressLine(0);
+                                        String[] address = addressLine.split(" ");
+
+                                        marker.setTitle(address[2] + " " + address[3] + " " + address[4]);
+                                    } else {
+                                        marker.setTitle(getString(R.string.select));
+                                    }
+                                } catch (IOException e) {
+                                }
+
+                                return false;
+                            }
+                        });
+                        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker marker) {
+                                LatLng position = marker.getPosition();
+                                Intent intent = new Intent();
+
+                                intent.putExtra(EXTRA_CITY_NAME, marker.getTitle());
+                                intent.putExtra(EXTRA_LATITUDE, position.latitude);
+                                intent.putExtra(EXTRA_LONGTITUDE, position.longitude);
+                                Log.e("marker", "position : " + position.latitude + "," + position.longitude);
+                                setResult(MainActivity.RESULT_OK, intent);
+                                finish();
+                            }
+                        });
                     } catch (NumberFormatException e) {
 
                     }

@@ -29,11 +29,11 @@ public class SelectedCityFragment extends DaggerFragment {
     private CityViewModel mViewModel;
     private CurrentAreaFragmentBinding mBinding;
 
-    public static SelectedCityFragment newInstance(float latitude, float longtitude) {
+    public static SelectedCityFragment newInstance(double latitude, double longtitude) {
         SelectedCityFragment selectedCityFragment = new SelectedCityFragment();
         Bundle args = new Bundle();
-        args.putFloat(SearchActivity.EXTRA_LATITUDE, latitude);
-        args.putFloat(SearchActivity.EXTRA_LONGTITUDE, longtitude);
+        args.putDouble(SearchActivity.EXTRA_LATITUDE, latitude);
+        args.putDouble(SearchActivity.EXTRA_LONGTITUDE, longtitude);
         selectedCityFragment.setArguments(args);
         return selectedCityFragment;
     }
@@ -100,8 +100,8 @@ public class SelectedCityFragment extends DaggerFragment {
 
     private void init() {
         setClickListener();
-        float latitude = getArguments().getFloat(SearchActivity.EXTRA_LATITUDE, 0);
-        float longtitude = getArguments().getFloat(SearchActivity.EXTRA_LONGTITUDE, 0);
+        double latitude = getArguments().getDouble(SearchActivity.EXTRA_LATITUDE, 0);
+        double longtitude = getArguments().getDouble(SearchActivity.EXTRA_LONGTITUDE, 0);
 
         mViewModel.getFeedFromLocation(latitude, longtitude).observe(this, new Observer<ResponseState>() {
             @Override

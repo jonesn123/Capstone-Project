@@ -160,8 +160,8 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
         if (requestCode == REQUEST_SEARCH) {
             if (resultCode == RESULT_OK) {
                 String cityName = data.getStringExtra(SearchActivity.EXTRA_CITY_NAME);
-                float latitude = data.getFloatExtra(SearchActivity.EXTRA_LATITUDE, 0);
-                float longtitude = data.getFloatExtra(SearchActivity.EXTRA_LONGTITUDE, 0);
+                double latitude = data.getDoubleExtra(SearchActivity.EXTRA_LATITUDE, 0);
+                double longtitude = data.getDoubleExtra(SearchActivity.EXTRA_LONGTITUDE, 0);
 
                 String simpleCityName = cityName.split(",|\\;")[0];
                 Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
