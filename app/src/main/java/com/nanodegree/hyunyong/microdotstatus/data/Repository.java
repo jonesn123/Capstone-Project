@@ -1,12 +1,12 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.List;
+import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
+import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,11 +14,11 @@ import retrofit2.Response;
 
 public class Repository {
     private Webservice webservice;
-    private SharedPreferences sharedPreferences;
+    private AppDatabase appDatabase;
 
-    public Repository(Webservice webservice, SharedPreferences sharedPreferences) {
+    public Repository(Webservice webservice, AppDatabase appDatabase) {
         this.webservice = webservice;
-        this.sharedPreferences = sharedPreferences;
+        this.appDatabase = appDatabase;
     }
 
     public LiveData<ResponseState> getFeedFromLocation(double latitude, double longtitude) {
@@ -28,6 +28,13 @@ public class Repository {
             @Override
             public void onResponse(Call<ResponseState> call, Response<ResponseState> response) {
                 data.setValue(response.body());
+                if (response.body() != null) {
+                    CityDao cityDao = appDatabase.cityDao();
+                    City city = response.body().getData().getCity();
+                    cityDao.insert(city);
+
+                    Log.e("test", cityDao.getCities().toString());
+                }
             }
 
             @Override

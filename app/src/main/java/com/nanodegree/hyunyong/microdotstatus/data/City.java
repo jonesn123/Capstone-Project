@@ -1,10 +1,21 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.nanodegree.hyunyong.microdotstatus.db.ConverterFloatToString;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class City {
+    @TypeConverters(ConverterFloatToString.class)
     List<Float> geo = new ArrayList<>();
+    @PrimaryKey
+    @NonNull
     private String name;
     private String url;
 

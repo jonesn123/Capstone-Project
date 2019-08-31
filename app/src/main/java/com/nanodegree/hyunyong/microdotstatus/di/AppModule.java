@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.room.Room;
+
 import com.nanodegree.hyunyong.microdotstatus.data.Repository;
 import com.nanodegree.hyunyong.microdotstatus.data.Webservice;
+import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
 
 import dagger.Binds;
 import dagger.Module;
@@ -23,7 +26,12 @@ abstract class AppModule {
     }
 
     @Provides
-    static Repository provideRepository(Webservice webservice, SharedPreferences sharedPreferences) {
-        return new Repository(webservice, sharedPreferences);
+    static Repository provideRepository(Webservice webservice, AppDatabase appDatabase) {
+        return new Repository(webservice, appDatabase);
+    }
+
+    @Provides
+    static AppDatabase provideAppDatabase(Application application) {
+        return Room.databaseBuilder(application, AppDatabase.class, "app-db").allowMainThreadQueries().build();
     }
 }
