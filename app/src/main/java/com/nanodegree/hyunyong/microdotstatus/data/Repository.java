@@ -32,8 +32,6 @@ public class Repository {
                     CityDao cityDao = appDatabase.cityDao();
                     City city = response.body().getData().getCity();
                     cityDao.insert(city);
-
-                    Log.e("test", cityDao.getCities().toString());
                 }
             }
 

@@ -5,15 +5,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.nanodegree.hyunyong.microdotstatus.db.ConverterFloatToString;
+import com.nanodegree.hyunyong.microdotstatus.db.ConverterDoubleToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class City {
-    @TypeConverters(ConverterFloatToString.class)
-    List<Float> geo = new ArrayList<>();
+    @TypeConverters(ConverterDoubleToString.class)
+    List<Double> geo = new ArrayList<>();
     @PrimaryKey
     @NonNull
     private String name;
@@ -35,11 +35,11 @@ public class City {
         this.url = url;
     }
 
-    public List<Float> getGeo() {
+    public List<Double> getGeo() {
         return geo;
     }
 
-    public void setGeo(List<Float> geo) {
+    public void setGeo(List<Double> geo) {
         this.geo = geo;
     }
 }

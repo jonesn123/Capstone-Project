@@ -2,32 +2,28 @@ package com.nanodegree.hyunyong.microdotstatus.db;
 
 import androidx.room.TypeConverter;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConverterFloatToString {
+public class ConverterDoubleToString {
     @TypeConverter
-    public List<Float> gettingListFromString(String genreIds) {
-        List<Float> list = new ArrayList<>();
+    public List<Double> gettingListFromString(String genreIds) {
+        List<Double> list = new ArrayList<>();
 
         String[] array = genreIds.split(",");
 
         for (String s : array) {
             if (!s.isEmpty()) {
-                list.add(Float.parseFloat(s));
+                list.add(Double.parseDouble(s));
             }
         }
         return list;
     }
 
     @TypeConverter
-    public String writingStringFromList(List<Float> list) {
+    public String writingStringFromList(List<Double> list) {
         String genreIds = "";
-        for (float i : list) {
+        for (double i : list) {
             genreIds += "," + i;
         }
         return genreIds;

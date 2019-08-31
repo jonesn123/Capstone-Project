@@ -7,7 +7,7 @@ import androidx.room.TypeConverters;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 
 @Database(entities = {City.class}, version = 1)
-@TypeConverters({ConverterFloatToString.class})
+@TypeConverters({ConverterDoubleToString.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CityDao cityDao();
 }
