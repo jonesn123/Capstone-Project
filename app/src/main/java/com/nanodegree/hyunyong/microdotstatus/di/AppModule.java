@@ -26,8 +26,8 @@ abstract class AppModule {
     }
 
     @Provides
-    static Repository provideRepository(Webservice webservice, AppDatabase appDatabase) {
-        return new Repository(webservice, appDatabase);
+    static Repository provideRepository(Webservice webservice) {
+        return new Repository(webservice);
     }
 
     @Provides

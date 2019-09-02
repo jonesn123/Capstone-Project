@@ -14,9 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
 import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 import com.nanodegree.hyunyong.microdotstatus.databinding.CurrentAreaFragmentBinding;
+import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
+import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 
 import javax.inject.Inject;
 
@@ -28,6 +31,9 @@ public class SelectedCityFragment extends DaggerFragment {
 
     private CityViewModel mViewModel;
     private CurrentAreaFragmentBinding mBinding;
+
+    @Inject
+    public AppDatabase mDatabase;
 
     public static SelectedCityFragment newInstance(double latitude, double longtitude) {
         SelectedCityFragment selectedCityFragment = new SelectedCityFragment();
@@ -87,6 +93,20 @@ public class SelectedCityFragment extends DaggerFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.current_area_fragment, container, false);
+        mBinding.deleteCity.setVisibility(View.VISIBLE);
+        mBinding.deleteCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // delete database
+                City city = mBinding.getCity();
+                mDatabase.cityDao().delete(city);
+                // remove fragment
+                MainActivity activity = (MainActivity) getActivity();
+                if (activity != null) {
+                    activity.removeFragment(SelectedCityFragment.this);
+                }
+            }
+        });
         return mBinding.getRoot();
     }
 
@@ -112,6 +132,10 @@ public class SelectedCityFragment extends DaggerFragment {
                 mBinding.setIaqi(data.getIaqi());
                 mBinding.setCity(data.getCity());
                 mBinding.setTime(data.getTime());
+
+                CityDao cityDao = mDatabase.cityDao();
+                City city = data.getCity();
+                cityDao.insert(city);
             }
         });
     }

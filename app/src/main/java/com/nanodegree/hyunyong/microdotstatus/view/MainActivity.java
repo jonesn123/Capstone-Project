@@ -9,7 +9,6 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +26,12 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.nanodegree.hyunyong.microdotstatus.BuildConfig;
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.data.City;
+import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -38,8 +43,9 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
     private Boolean isFabOpen = false;
     private FloatingActionButton search, location, add;
     private TabFragmentPagerAdapter adapter;
-    // boolean flag to toggle the ui
-    private Boolean mRequestingLocationUpdates;
+    @Inject
+    public AppDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +75,6 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        mRequestingLocationUpdates = true;
                         // current Fragment set
                         setupViewPager(viewPager);
                     }
@@ -96,11 +101,28 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
         checkPermissions();
     }
 
+    public void removeFragment(Fragment fragment) {
+        adapter.removeFragment(fragment);
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         adapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(CurrentAreaFragment.newInstance(), getResources().getString(R.string.current_city));
         viewPager.setAdapter(adapter);
+        addFragmentFromDatabase();
+    }
 
+    private void addFragmentFromDatabase() {
+        List<City> cites = database.cityDao().getCities();
+        for (City city : cites) {
+            addFragmentFromCity(city.getName(), city.getGeo().get(0), city.getGeo().get(1));
+        }
+    }
+
+    private void addFragmentFromCity(String cityName, double latitude, double longtitude) {
+        String simpleCityName = cityName.split(",|\\;")[0];
+        Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
+        adapter.addFragment(fragment, simpleCityName);
     }
 
     @Override
@@ -163,10 +185,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 double latitude = data.getDoubleExtra(SearchActivity.EXTRA_LATITUDE, 0);
                 double longtitude = data.getDoubleExtra(SearchActivity.EXTRA_LONGTITUDE, 0);
 
-                String simpleCityName = cityName.split(",|\\;")[0];
-                Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
-                adapter.addFragment(fragment, simpleCityName);
-
+                addFragmentFromCity(cityName, latitude, longtitude);
                 TabLayout tabLayout = findViewById(R.id.tabs);
                 TabLayout.Tab tab = tabLayout.getTabAt(adapter.getCount() - 1);
                 tab.select();

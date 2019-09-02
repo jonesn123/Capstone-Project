@@ -22,6 +22,20 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeFragment(Fragment fragment) {
+        int position = -1;
+        for (int i = 0; i < mFragments.size(); i++) {
+            if (fragment.equals(mFragments.get(i))) {
+                position = i;
+            }
+        }
+        if (position == -1) return;
+
+        mFragments.remove(position);
+        mFragmentTitles.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mFragments.size();

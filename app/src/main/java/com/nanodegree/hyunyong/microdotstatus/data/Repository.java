@@ -14,11 +14,9 @@ import retrofit2.Response;
 
 public class Repository {
     private Webservice webservice;
-    private AppDatabase appDatabase;
 
-    public Repository(Webservice webservice, AppDatabase appDatabase) {
+    public Repository(Webservice webservice) {
         this.webservice = webservice;
-        this.appDatabase = appDatabase;
     }
 
     public LiveData<ResponseState> getFeedFromLocation(double latitude, double longtitude) {
@@ -28,11 +26,6 @@ public class Repository {
             @Override
             public void onResponse(Call<ResponseState> call, Response<ResponseState> response) {
                 data.setValue(response.body());
-                if (response.body() != null) {
-                    CityDao cityDao = appDatabase.cityDao();
-                    City city = response.body().getData().getCity();
-                    cityDao.insert(city);
-                }
             }
 
             @Override
