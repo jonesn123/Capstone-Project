@@ -27,6 +27,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            app:tabGravity="center"
+            app:tabMode="scrollable"
+            app:tabMinWidth="120dp"
             android:background="@color/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="135dp"
         android:visibility="invisible"
         app:srcCompat="@drawable/ic_search" />
 
@@ -53,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         android:visibility="invisible"
         app:srcCompat="@drawable/ic_add_location" />
 

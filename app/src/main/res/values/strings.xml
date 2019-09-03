@@ -36,4 +36,6 @@
     <string name="title_activity_maps">Search Map</string>
     <string name="select">Select</string>
     <string name="current_area">Current Area</string>
+    <string name="delete_city">Are you sure delete selected city?</string>
+    <string name="max_city">Max city is 20. Please delete saved city.</string>
 </resources>

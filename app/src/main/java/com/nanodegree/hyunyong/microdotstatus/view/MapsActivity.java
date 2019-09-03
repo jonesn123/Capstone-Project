@@ -28,7 +28,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.nanodegree.hyunyong.microdotstatus.BindingUtil;
+import com.nanodegree.hyunyong.microdotstatus.Utils;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
 import com.nanodegree.hyunyong.microdotstatus.R;
 import com.nanodegree.hyunyong.microdotstatus.data.Map;
@@ -68,9 +68,9 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
 
                     try {
                         View view = LayoutInflater.from(MapsActivity.this).inflate(R.layout.marker_layout, null);
-                        ((ImageView) view.findViewById(R.id.iv_icon)).setImageResource(BindingUtil.getDrawableResourceByAqi(map.getAqi()));
+                        ((ImageView) view.findViewById(R.id.iv_icon)).setImageResource(Utils.getDrawableResourceByAqi(map.getAqi()));
                         ((TextView) view.findViewById(R.id.tv_marker)).setText(String.valueOf(map.getAqi()));
-                        view.findViewById(R.id.background).setBackgroundResource(BindingUtil.getColorResourceByAqi(map.getAqi()));
+                        view.findViewById(R.id.background).setBackgroundResource(Utils.getColorResourceByAqi(map.getAqi()));
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)

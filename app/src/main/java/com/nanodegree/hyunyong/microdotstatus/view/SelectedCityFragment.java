@@ -1,10 +1,12 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.Utils;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
 import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
@@ -97,14 +100,27 @@ public class SelectedCityFragment extends DaggerFragment {
         mBinding.deleteCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // delete database
-                City city = mBinding.getCity();
-                mDatabase.cityDao().delete(city);
-                // remove fragment
-                MainActivity activity = (MainActivity) getActivity();
-                if (activity != null) {
-                    activity.removeFragment(SelectedCityFragment.this);
-                }
+                final City city = mBinding.getCity();
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(Utils.getSimpleCityName(city.getName()))
+                        .setMessage(R.string.delete_city)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // delete database
+                                mDatabase.cityDao().delete(city);
+                                // remove fragment
+                                MainActivity activity = (MainActivity) getActivity();
+                                if (activity != null) {
+                                    activity.removeFragment(SelectedCityFragment.this);
+                                }
+                            }
+                        }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
             }
         });
         return mBinding.getRoot();

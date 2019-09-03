@@ -37,4 +37,6 @@
     <string name="title_activity_maps">지도 검색</string>
     <string name="select">선택</string>
     <string name="current_area">현재 지역</string>
+    <string name="delete_city">선택 도시를 삭제 하시겠습니까?</string>
+    <string name="max_city">최대 도시는 20개 입니다. 저장된 도시를 지워주세요.</string>
 </resources>

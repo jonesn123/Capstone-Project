@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
-public class BindingUtil {
+public class Utils {
     @BindingAdapter({"aqi"})
     public static void getColorResourceByAqi(TextView textView, float aqi) {
         Context context = textView.getContext();
@@ -99,4 +99,7 @@ public class BindingUtil {
         return resourceId;
     }
 
+    public static String getSimpleCityName(String cityName) {
+        return cityName.split(",|\\;")[0];
+    }
 }

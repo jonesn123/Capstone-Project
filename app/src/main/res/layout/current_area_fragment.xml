@@ -21,7 +21,7 @@
             name="time"
             type="com.nanodegree.hyunyong.microdotstatus.data.Time" />
 
-        <import type="com.nanodegree.hyunyong.microdotstatus.BindingUtil" />
+        <import type="com.nanodegree.hyunyong.microdotstatus.Utils" />
     </data>
 
     <ScrollView

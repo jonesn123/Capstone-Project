@@ -9,6 +9,7 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +27,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.nanodegree.hyunyong.microdotstatus.BuildConfig;
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.Utils;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
 
@@ -39,6 +41,8 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
     public static final int REQUEST_SEARCH = 0;
     public static final int RESULT_OK = 1;
     public static final int RESULT_CANCEL = 2;
+    private static final int MAX_CITY = 20;
+    private static final int PAGE_SIZE = 2;
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
     private FloatingActionButton search, location, add;
@@ -56,6 +60,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
 
         final ViewPager viewPager = findViewById(R.id.viewpager);
         TabLayout tabLayout = findViewById(R.id.tabs);
+        viewPager.setOffscreenPageLimit(PAGE_SIZE);
         tabLayout.setupWithViewPager(viewPager);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
@@ -120,7 +125,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void addFragmentFromCity(String cityName, double latitude, double longtitude) {
-        String simpleCityName = cityName.split(",|\\;")[0];
+        String simpleCityName = Utils.getSimpleCityName(cityName);
         Fragment fragment = SelectedCityFragment.newInstance(latitude, longtitude);
         adapter.addFragment(fragment, simpleCityName);
     }
@@ -138,7 +143,11 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 startActivityForResult(new Intent(this, MapsActivity.class), REQUEST_SEARCH);
                 break;
             case R.id.fab_add:
-                anim();
+                if(adapter.getCount() > MAX_CITY) {
+                    Toast.makeText(this, R.string.max_city, Toast.LENGTH_LONG).show();
+                } else {
+                    anim();
+                }
                 break;
         }
     }

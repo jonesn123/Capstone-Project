@@ -1,14 +1,16 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
+public class TabFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mFragmentTitles = new ArrayList<>();
 
@@ -44,6 +46,11 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return PagerAdapter.POSITION_NONE;
     }
 
     @Nullable
