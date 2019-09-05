@@ -38,4 +38,6 @@
     <string name="current_area">Current Area</string>
     <string name="delete_city">Are you sure delete selected city?</string>
     <string name="max_city">Max city is 20. Please delete saved city.</string>
+    <string name="appwidget_text">AQI Status</string>
+    <string name="add_widget">Add widget</string>
 </resources>

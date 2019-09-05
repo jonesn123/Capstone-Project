@@ -1,9 +1,7 @@
 package com.nanodegree.hyunyong.microdotstatus.data;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Microdot {
-    private float aqi;
+    private double aqi;
     City city;
     Iaqi iaqi;
     Time time;
@@ -11,7 +9,7 @@ public class Microdot {
 
     // Getter Methods
 
-    public float getAqi() {
+    public double getAqi() {
         return aqi;
     }
 

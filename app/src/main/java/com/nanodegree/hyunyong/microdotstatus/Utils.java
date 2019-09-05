@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter;
 
 public class Utils {
     @BindingAdapter({"aqi"})
-    public static void getColorResourceByAqi(TextView textView, float aqi) {
+        public static void getColorResourceByAqi(TextView textView, double aqi) {
         Context context = textView.getContext();
         int backgroundColor = 0;
         int textColor = 0;
@@ -35,7 +35,7 @@ public class Utils {
     }
 
     @BindingAdapter({"aqiText"})
-    public static void getAqiText(TextView textView, float aqi) {
+    public static void getAqiText(TextView textView, double aqi) {
         Context context = textView.getContext();
         int textResource = 0;
         int textColor = 0;
@@ -64,7 +64,7 @@ public class Utils {
         textView.setTextColor(textColor);
     }
 
-    public static int getDrawableResourceByAqi(float aqi) {
+    public static int getDrawableResourceByAqi(double aqi) {
         int resourceId = 0;
         if (aqi <= 50) {
             resourceId = R.drawable.very_good;
@@ -80,7 +80,7 @@ public class Utils {
         return resourceId;
     }
 
-    public static int getColorResourceByAqi(float aqi) {
+    public static int getColorResourceByAqi(double aqi) {
         int resourceId = 0;
         if (aqi <= 50) {
             resourceId = R.color.aqi_good;
