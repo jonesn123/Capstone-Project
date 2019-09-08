@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.room.Room;
 
+import com.google.android.gms.location.LocationCallback;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
 import com.nanodegree.hyunyong.microdotstatus.data.Repository;
@@ -46,7 +47,8 @@ public class AQIWidget extends AppWidgetProvider {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(Webservice.class));
         if (dao == null) return;
-        List<City> cityList = dao.getCities();
+        List<City> cityList = dao.getCities(true);
+
         for (int i = 0; i < cityList.size() ; i++) {
             final City city = cityList.get(i);
             repository.getFeedFromLocation(city.getGeo().get(0), city.getGeo().get(1)).observeForever(new Observer<ResponseState>() {

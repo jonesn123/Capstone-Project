@@ -19,6 +19,16 @@ public class City {
     private String name;
     private String url;
 
+    public boolean isWidget() {
+        return isWidget;
+    }
+
+    public void setWidget(boolean widget) {
+        isWidget = widget;
+    }
+
+    private boolean isWidget;
+
     public String getName() {
         return name;
     }

@@ -17,9 +17,12 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
 import com.nanodegree.hyunyong.microdotstatus.R;
+import com.nanodegree.hyunyong.microdotstatus.data.City;
 import com.nanodegree.hyunyong.microdotstatus.data.Microdot;
 import com.nanodegree.hyunyong.microdotstatus.data.ResponseState;
 import com.nanodegree.hyunyong.microdotstatus.databinding.CurrentAreaFragmentBinding;
+import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
+import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 
 import javax.inject.Inject;
 
@@ -30,6 +33,8 @@ public class CurrentAreaFragment extends DaggerFragment {
 
     private CurrentAreaFragmentBinding mBinding;
     private LocationManager mLocationManager;
+    @Inject
+    public AppDatabase mDatabase;
 
     public static CurrentAreaFragment newInstance() {
         return new CurrentAreaFragment();
@@ -115,6 +120,11 @@ public class CurrentAreaFragment extends DaggerFragment {
                         mBinding.setIaqi(data.getIaqi());
                         mBinding.setCity(data.getCity());
                         mBinding.setTime(data.getTime());
+
+                        CityDao cityDao = mDatabase.cityDao();
+                        City city = data.getCity();
+                        city.setWidget(true);
+                        cityDao.insert(city);
                     }
                 });
 

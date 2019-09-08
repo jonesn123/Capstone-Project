@@ -13,8 +13,8 @@ import java.util.List;
 @Dao
 public interface CityDao {
 
-    @Query("SELECT * FROM city")
-    List<City> getCities();
+    @Query("SELECT * FROM city WHERE isWidget = :isWidget")
+    List<City> getCities(boolean isWidget);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(City city);
