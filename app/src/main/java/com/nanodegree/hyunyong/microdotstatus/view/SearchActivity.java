@@ -72,8 +72,9 @@ public class SearchActivity extends DaggerAppCompatActivity {
                                 intent.putExtra(EXTRA_LONGTITUDE, city.getGeo().get(1));
                                 if (isFromWidget) {
                                     // notify to widget
-                                    City widget = cityDao.getCity(true);
-                                    if (widget != null) {
+                                    List<City> widgets = cityDao.getCities(true, false);
+                                    if (widgets.size() != 0) {
+                                        City widget = widgets.get(0);
                                         cityDao.delete(widget);
                                     }
                                     city.setWidget(true);

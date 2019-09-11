@@ -118,7 +118,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void addFragmentFromDatabase() {
-        List<City> cites = database.cityDao().getCities(false);
+        List<City> cites = database.cityDao().getCities(false, false);
         for (City city : cites) {
             addFragmentFromCity(city.getName(), city.getGeo().get(0), city.getGeo().get(1));
         }

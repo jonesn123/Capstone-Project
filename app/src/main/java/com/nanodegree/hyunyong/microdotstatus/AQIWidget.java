@@ -22,6 +22,8 @@ import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 import com.nanodegree.hyunyong.microdotstatus.view.MainActivity;
 import com.nanodegree.hyunyong.microdotstatus.view.SearchActivity;
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -55,14 +57,15 @@ public class AQIWidget extends AppWidgetProvider {
 
 
         // current city widget
-        final City currentCity = dao.getCurrentCity(true);
-        if (currentCity == null) return;
-        repository.getFeedFromLocation(currentCity.getGeo().get(0), currentCity.getGeo().get(1)).observeForever(new Observer<ResponseState>() {
+        final List<City> currentCity = dao.getCities(true, true);
+        if (currentCity.size() == 0) return;
+        final City city = currentCity.get(0);
+        repository.getFeedFromLocation(city.getGeo().get(0), city.getGeo().get(1)).observeForever(new Observer<ResponseState>() {
             @Override
             public void onChanged(ResponseState responseState) {
                 if ("ok".equals(responseState.getStatus())) {
                     Microdot microdot = responseState.getData();
-                    views.setTextViewText(R.id.city_name, Utils.getSimpleCityName(currentCity.getName()));
+                    views.setTextViewText(R.id.city_name, Utils.getSimpleCityName(city.getName()));
                     views.setImageViewResource(R.id.iv_icon, Utils.getDrawableResourceByAqi(microdot.getAqi()));
                     views.setTextViewText(R.id.tv_marker, String.valueOf(microdot.getAqi()));
                     views.setInt(R.id.current_city_container, "setBackgroundResource", Utils.getColorResourceByAqi(microdot.getAqi()));
@@ -72,8 +75,9 @@ public class AQIWidget extends AppWidgetProvider {
         });
 
         // second setting widget
-        final City widget = dao.getCity(true);
-        if (widget == null) return;
+        final List<City> widgets = dao.getCities(true, false);
+        if (widgets.size() == 0) return;
+        final City widget = widgets.get(0);
         repository.getFeedFromLocation(widget.getGeo().get(0), widget.getGeo().get(1)).observeForever(new Observer<ResponseState>() {
             @Override
             public void onChanged(ResponseState responseState) {

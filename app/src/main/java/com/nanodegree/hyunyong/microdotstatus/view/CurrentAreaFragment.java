@@ -29,6 +29,8 @@ import com.nanodegree.hyunyong.microdotstatus.databinding.CurrentAreaFragmentBin
 import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
 import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
@@ -127,14 +129,16 @@ public class CurrentAreaFragment extends DaggerFragment {
 
                         // delete current data of widget
                         CityDao cityDao = mDatabase.cityDao();
-                        City currentCity = cityDao.getCurrentCity(true);
-                        if (currentCity != null) {
+                        List<City> currentCities = cityDao.getCities(true, true);
+                        if (currentCities.size() != 0) {
+                            City currentCity = currentCities.get(0);
                             cityDao.delete(currentCity);
                         }
 
                         // insert new data of widget
                         City city = data.getCity();
                         city.setCurrentCity(true);
+                        city.setWidget(true);
                         cityDao.insert(city);
 
                         Context context = getContext();
