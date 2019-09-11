@@ -1,20 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/appwidget_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primaryDarkColor"
-        android:contentDescription="@string/appwidget_text"
-        android:gravity="top|center_horizontal"
-        android:text="@string/appwidget_text"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +10,8 @@
         android:layout_margin="8dp"
         android:orientation="horizontal">
 
-        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/bg_conatainer"
+        <LinearLayout
+            android:id="@+id/current_city_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -63,51 +51,58 @@
 
     </LinearLayout>
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/bg_conatainer2"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="4dp"
-        android:visibility="gone">
-
-
-        <TextView
-            android:id="@+id/city_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="New york" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/selected_widget_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:visibility="invisible">
 
-            <ImageView
-                android:id="@+id/iv_icon2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:src="@drawable/bad" />
 
             <TextView
-                android:id="@+id/tv_marker2"
+                android:id="@+id/city_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:gravity="center"
-                android:textSize="16sp"
-                tools:text="API : 82" />
-        </LinearLayout>
-    </LinearLayout>
+                android:textSize="18sp"
+                tools:text="New york" />
 
-    <ImageView
-        android:id="@+id/add_location"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_plus_24px" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_icon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@drawable/bad" />
+
+                <TextView
+                    android:id="@+id/tv_marker2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    tools:text="API : 82" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/add_location"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/ic_search" />
+    </FrameLayout>
+
 </LinearLayout>

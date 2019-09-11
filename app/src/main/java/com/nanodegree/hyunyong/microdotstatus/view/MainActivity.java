@@ -143,7 +143,7 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
                 startActivityForResult(new Intent(this, MapsActivity.class), REQUEST_SEARCH);
                 break;
             case R.id.fab_add:
-                if(adapter.getCount() > MAX_CITY) {
+                if (adapter.getCount() > MAX_CITY) {
                     Toast.makeText(this, R.string.max_city, Toast.LENGTH_LONG).show();
                 } else {
                     anim();

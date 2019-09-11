@@ -9,6 +9,7 @@ import androidx.room.Room;
 import com.nanodegree.hyunyong.microdotstatus.data.Repository;
 import com.nanodegree.hyunyong.microdotstatus.data.Webservice;
 import com.nanodegree.hyunyong.microdotstatus.db.AppDatabase;
+import com.nanodegree.hyunyong.microdotstatus.db.CityDao;
 
 import dagger.Binds;
 import dagger.Module;
@@ -33,5 +34,10 @@ abstract class AppModule {
     @Provides
     static AppDatabase provideAppDatabase(Application application) {
         return Room.databaseBuilder(application, AppDatabase.class, "app-db").allowMainThreadQueries().build();
+    }
+
+    @Provides
+    static CityDao provideCityDao(AppDatabase database) {
+        return database.cityDao();
     }
 }

@@ -1,6 +1,10 @@
 package com.nanodegree.hyunyong.microdotstatus.view;
 
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
+import com.nanodegree.hyunyong.microdotstatus.AQIWidget;
 import com.nanodegree.hyunyong.microdotstatus.LocationManager;
 import com.nanodegree.hyunyong.microdotstatus.R;
 import com.nanodegree.hyunyong.microdotstatus.data.City;
@@ -96,7 +101,6 @@ public class CurrentAreaFragment extends DaggerFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(CityViewModel.class);
-        // TODO: Use the ViewModel
         init();
         mLocationManager.updateLocation();
     }
@@ -121,10 +125,27 @@ public class CurrentAreaFragment extends DaggerFragment {
                         mBinding.setCity(data.getCity());
                         mBinding.setTime(data.getTime());
 
+                        // delete current data of widget
                         CityDao cityDao = mDatabase.cityDao();
+                        City currentCity = cityDao.getCurrentCity(true);
+                        if (currentCity != null) {
+                            cityDao.delete(currentCity);
+                        }
+
+                        // insert new data of widget
                         City city = data.getCity();
-                        city.setWidget(true);
+                        city.setCurrentCity(true);
                         cityDao.insert(city);
+
+                        Context context = getContext();
+                        if (context == null) {
+                            return;
+                        }
+
+                        // notify to widget
+                        Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                        intent.setComponent(new ComponentName(context, AQIWidget.class));
+                        context.sendBroadcast(intent);
                     }
                 });
 

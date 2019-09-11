@@ -2,9 +2,8 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/aqiwidget"
     android:initialLayout="@layout/aqiwidget"
-    android:minWidth="110dp"
-    android:minHeight="110dp"
+    android:minWidth="320dp"
+    android:minHeight="100dp"
     android:previewImage="@drawable/example_appwidget_preview"
-    android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen|keyguard"></appwidget-provider>

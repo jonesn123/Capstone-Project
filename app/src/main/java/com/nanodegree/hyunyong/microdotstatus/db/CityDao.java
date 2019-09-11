@@ -16,6 +16,12 @@ public interface CityDao {
     @Query("SELECT * FROM city WHERE isWidget = :isWidget")
     List<City> getCities(boolean isWidget);
 
+    @Query("SELECT * FROM city WHERE isWidget = :isWidget")
+    City getCity(boolean isWidget);
+
+    @Query("SELECT * FROM city WHERE isCurrentCity = :isCurrentCity")
+    City getCurrentCity(boolean isCurrentCity);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(City city);
 

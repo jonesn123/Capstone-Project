@@ -18,16 +18,24 @@ public class City {
     @NonNull
     private String name;
     private String url;
+    private boolean isWidget;
+    private boolean isCurrentCity;
 
     public boolean isWidget() {
         return isWidget;
     }
 
-    public void setWidget(boolean widget) {
-        isWidget = widget;
+    public boolean isCurrentCity() {
+        return isCurrentCity;
     }
 
-    private boolean isWidget;
+    public void setWidget(boolean widget) {
+        this.isWidget = widget;
+    }
+
+    public void setCurrentCity(boolean currentCity) {
+        this.isCurrentCity = currentCity;
+    }
 
     public String getName() {
         return name;
