@@ -25,7 +25,6 @@ public class LocationManager {
 
     private static final int REQUEST_CHECK_SETTINGS = 100;
 
-    // bunch of location related apis
     private FusedLocationProviderClient mFusedLocationClient;
     private SettingsClient mSettingsClient;
     private LocationRequest mLocationRequest;
@@ -47,11 +46,6 @@ public class LocationManager {
         mLocationSettingsRequest = builder.build();
     }
 
-    /**
-     * Starting location updates
-     * Check whether location settings are satisfied and then
-     * location updates will be requested
-     */
     public void updateLocation() {
         mSettingsClient
                 .checkLocationSettings(mLocationSettingsRequest)
@@ -60,7 +54,6 @@ public class LocationManager {
                     @Override
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
 
-                        //noinspection MissingPermission
                         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                                 mLocationCallback, Looper.myLooper());
 
@@ -73,8 +66,6 @@ public class LocationManager {
                         switch (statusCode) {
                             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                                 try {
-                                    // Show the dialog by calling startResolutionForResult(), and check the
-                                    // result in onActivityResult().
                                     ResolvableApiException rae = (ResolvableApiException) e;
                                     rae.startResolutionForResult(mActivity, REQUEST_CHECK_SETTINGS);
                                 } catch (IntentSender.SendIntentException sie) {

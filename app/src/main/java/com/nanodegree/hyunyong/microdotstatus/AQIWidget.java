@@ -28,9 +28,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class AQIWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, final AppWidgetManager appWidgetManager,
                                 final int appWidgetId) {
@@ -46,7 +43,6 @@ public class AQIWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.current_city_container, pendingIntent);
 
 
-        // There may be multiple widgets active, so update all of them
         CityDao dao = Room.databaseBuilder(context, AppDatabase.class, "app-db").allowMainThreadQueries().build().cityDao();
         Repository repository = new Repository(new Retrofit.Builder()
                 .baseUrl("https://api.waqi.info/")
