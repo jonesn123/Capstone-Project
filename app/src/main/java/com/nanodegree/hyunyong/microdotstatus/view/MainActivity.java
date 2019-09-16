@@ -159,12 +159,16 @@ public class MainActivity extends DaggerAppCompatActivity implements View.OnClic
             location.startAnimation(fab_close);
             search.setClickable(false);
             location.setClickable(false);
+            search.setVisibility(View.INVISIBLE);
+            location.setVisibility(View.INVISIBLE);
             isFabOpen = false;
         } else {
             search.startAnimation(fab_open);
             location.startAnimation(fab_open);
             search.setClickable(true);
             location.setClickable(true);
+            search.setVisibility(View.VISIBLE);
+            location.setVisibility(View.VISIBLE);
             isFabOpen = true;
         }
     }

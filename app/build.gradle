@@ -32,12 +32,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // location play services
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-
 
     // dexter runtime permissions
     implementation 'com.karumi:dexter:4.2.0'
@@ -62,4 +59,16 @@ dependencies {
     def google_service = '17.0.0'
     implementation "com.google.android.gms:play-services-maps:$google_service"
     implementation "com.google.android.gms:play-services-location:$google_service"
+
+    // for androidTest
+    def espresso_version = "3.1.1"
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+
 }
