@@ -43,7 +43,8 @@
                 android:layout_gravity="top|end"
                 android:layout_marginEnd="8dp"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/ic_clear" />
+                app:srcCompat="@drawable/ic_clear"
+                android:contentDescription="@string/delete_city" />
 
             <TextView
                 android:layout_width="wrap_content"

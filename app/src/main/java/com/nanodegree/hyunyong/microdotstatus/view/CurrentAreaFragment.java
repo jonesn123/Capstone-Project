@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.nanodegree.hyunyong.microdotstatus.AQIWidget;
@@ -129,27 +131,10 @@ public class CurrentAreaFragment extends DaggerFragment {
 
                         // delete current data of widget
                         CityDao cityDao = mDatabase.cityDao();
-                        List<City> currentCities = cityDao.getCities(true, true);
-                        if (currentCities.size() != 0) {
-                            City currentCity = currentCities.get(0);
-                            cityDao.delete(currentCity);
-                        }
 
                         // insert new data of widget
                         City city = data.getCity();
-                        city.setCurrentCity(true);
-                        city.setWidget(true);
-                        cityDao.insert(city);
-
-                        Context context = getContext();
-                        if (context == null) {
-                            return;
-                        }
-
-                        // notify to widget
-                        Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                        intent.setComponent(new ComponentName(context, AQIWidget.class));
-                        context.sendBroadcast(intent);
+                        new HandleWidgetDataTask(getContext(), cityDao, city).execute();
                     }
                 });
 
@@ -169,4 +154,42 @@ public class CurrentAreaFragment extends DaggerFragment {
         rootView.findViewById(R.id.aqi_extremely_bad).setOnClickListener(onAqiInformationClickListener);
     }
 
+    public static class HandleWidgetDataTask extends AsyncTask<Void, Void, List<City>> {
+
+        CityDao cityDao;
+        City data;
+        Context context;
+
+        HandleWidgetDataTask(Context context, CityDao cityDao, City data) {
+            this.cityDao = cityDao;
+            this.data = data;
+            this.context = context;
+        }
+        @Override
+        protected List<City> doInBackground(Void... voids) {
+            return cityDao.getCities(true, true);
+        }
+
+        @Override
+        protected void onPostExecute(List<City> cities) {
+            if(!CollectionUtils.isEmpty(cities)) {
+                City city = cities.get(0);
+                cityDao.delete(city);
+            }
+
+            data.setCurrentCity(true);
+            data.setWidget(true);
+            cityDao.insert(data);
+
+            if (context == null) {
+                return;
+            }
+
+            // notify to widget
+            Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            intent.setComponent(new ComponentName(context, AQIWidget.class));
+            context.sendBroadcast(intent);
+            super.onPostExecute(cities);
+        }
+    }
 }

@@ -6,4 +6,4 @@
     android:minHeight="100dp"
     android:previewImage="@drawable/widget_preview"
     android:updatePeriodMillis="600000"
-    android:widgetCategory="home_screen|keyguard"></appwidget-provider>
+    android:widgetCategory="home_screen|keyguard" />

@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -84,7 +85,7 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
                                 Geocoder gcd = new Geocoder(MapsActivity.this, Locale.getDefault());
                                 try {
                                     List<Address> addresses = gcd.getFromLocation(position.latitude, position.longitude, 1);
-                                    if (addresses.size() > 0) {
+                                    if (!CollectionUtils.isEmpty(addresses)) {
                                         String addressLine = addresses.get(0).getAddressLine(0);
                                         String[] address = addressLine.split(" ");
 
@@ -93,6 +94,7 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
                                         marker.setTitle(getString(R.string.select));
                                     }
                                 } catch (IOException e) {
+                                    Log.e("exception", e.toString());
                                 }
 
                                 return false;
@@ -113,7 +115,7 @@ public class MapsActivity extends DaggerAppCompatActivity implements OnMapReadyC
                             }
                         });
                     } catch (NumberFormatException e) {
-
+                        Log.e("exception", e.toString());
                     }
                 }
             }

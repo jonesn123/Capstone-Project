@@ -40,4 +40,6 @@
     <string name="max_city">Max city is 20. Please delete saved city.</string>
     <string name="appwidget_text">AQI Status</string>
     <string name="add_widget">Add widget</string>
+    <string name="aqi_icon">aqi_icon</string>
+    <string name="widget_icon">widget_aqi_icon</string>
 </resources>

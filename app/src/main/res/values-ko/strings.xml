@@ -41,4 +41,7 @@
     <string name="max_city">최대 도시는 20개 입니다. 저장된 도시를 지워주세요.</string>
     <string name="appwidget_text">대기오염 수치</string>
     <string name="add_widget">위젯 추가</string>
+    <string name="aqi_icon">대기오염 아이콘</string>
+    <string name="widget_icon">위젯 대기오염 아이콘</string>
+
 </resources>
